@@ -1,0 +1,169 @@
+<!-- signin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .form-box {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      padding: 40px 35px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      font-size: 15px;
+      transition: 0.3s ease;
+    }
+
+    .form-box input::placeholder {
+      color: #ccc;
+    }
+
+    .form-box input:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 8px #07f5e5;
+    }
+
+    .btn {
+      width: 100%;
+      background-color: #07f5e5;
+      color: #000;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #00d6c9;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .link a {
+      color: #07f5e5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: #ff5252;
+      font-size: 13px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>Sign In</h2>
+    <form id="signinForm" novalidate>
+      <input type="email" id="email" placeholder="📧 Email Address" required />
+      <div class="error-message" id="emailError">Please enter a valid email.</div>
+
+      <input type="password" id="password" placeholder="🔒 Password" required minlength="6" />
+      <div class="error-message" id="passwordError">Password must be at least 6 characters.</div>
+
+      <button class="btn" type="submit">Sign In</button>
+      <div class="link">
+        Don’t have an account? <a href="signup.html">Sign Up</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('signinForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Hide error messages
+      document.getElementById('emailError').style.display = 'none';
+      document.getElementById('passwordError').style.display = 'none';
+
+      // Get input values
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      let valid = true;
+
+      // Simple email regex validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById('emailError').style.display = 'block';
+        valid = false;
+      }
+
+      // Password length check
+      if (password.length < 6) {
+        document.getElementById('passwordError').style.display = 'block';
+        valid = false;
+      }
+
+      if (valid) {
+        // যদি সব ঠিক থাকে তাহলে index.html এ নিয়ে যাবে
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
+
+</body>
+</html>

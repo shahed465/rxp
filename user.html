@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Profile</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .profile-container {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      max-width: 700px;
+      width: 100%;
+      display: flex;
+      padding: 40px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .profile-pic {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: url('https://i.pravatar.cc/160') no-repeat center/cover;
+      box-shadow: 0 0 15px #07f5e5;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-pic input[type="file"] {
+      display: none;
+    }
+
+    .change-pic-label {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background-color: #07f5e5;
+      color: #000;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .change-pic-label:hover {
+      opacity: 1;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h2 {
+      margin-top: 0;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      margin: 6px 0;
+      font-size: 16px;
+      color: #c0eefd;
+    }
+
+    .profile-info .info-label {
+      font-weight: 600;
+      color: #07f5e5;
+      margin-top: 20px;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 14px 0;
+      width: 100%;
+      background-color: #07f5e5;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #00d6c9;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .profile-container {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+      .profile-pic {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+
+    <div class="profile-pic" title="Click to change profile picture">
+      <label for="profileImage" class="change-pic-label">Change</label>
+      <input type="file" id="profileImage" accept="image/*" />
+    </div>
+
+    <div class="profile-info">
+      <h2>Md Shahed</h2>
+      <p><strong>Email:</strong> shahed@example.com</p>
+      <p><strong>Phone:</strong> +8801234567890</p>
+
+      <button class="btn">Edit Profile</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Optional: profile pic preview on upload
+    const profilePicDiv = document.querySelector('.profile-pic');
+    const fileInput = document.getElementById('profileImage');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = e => {
+        profilePicDiv.style.backgroundImage = `url(${e.target.result})`;
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+</body>
+</html>
